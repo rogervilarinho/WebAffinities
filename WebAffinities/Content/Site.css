@@ -1140,8 +1140,17 @@ linha {
     margin: 0px 0px 0px 0px;
     font-size: 10px;
     text-align:center;
+    text-transform: uppercase;
 }
 
 #MainContent_gdvLayout td {
     padding: 0px 0px 2px 2px;
+}
+#MainContent_gdvLayout input[type="checkbox"] {
+    clear:both;
+    width: auto;
+}
+#MainContent_gdvLayout select {
+    margin:0px 0px 0px 0px;
+    text-align:center;
 }

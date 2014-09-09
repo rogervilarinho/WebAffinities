@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAffinities", "WebAffinities\WebAffinities.csproj", "{191082C1-8C4A-4374-97BE-3D703CBEA9BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOAffinities", "BOAffinities\BOAffinities.csproj", "{AB2DCE92-31E3-4D82-B104-6968614F7050}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{191082C1-8C4A-4374-97BE-3D703CBEA9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{191082C1-8C4A-4374-97BE-3D703CBEA9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{191082C1-8C4A-4374-97BE-3D703CBEA9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
