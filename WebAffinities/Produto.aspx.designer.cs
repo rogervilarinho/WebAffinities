@@ -31,6 +31,15 @@ namespace WebAffinities {
         protected global::System.Web.UI.WebControls.TextBox tbxCodigoProduto;
         
         /// <summary>
+        /// btnCriarLayout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCriarLayout;
+        
+        /// <summary>
         /// gdvLayout control.
         /// </summary>
         /// <remarks>

@@ -24,27 +24,30 @@
                     <div class="editor-field">
                         <asp:TextBox ID="tbxCodigoProduto" runat="server" Width="50px" Text="525"></asp:TextBox>
                     </div>
+                    <div class="editor-field">
+                         <asp:Button ID="btnCriarLayout" runat="server" Text="Criar Layout" OnClick="btnCriarLayout_Click" />
+                    </div>
                 </div>
                 <div style="clear: both; width: 100%;">
                     <asp:GridView ID="gdvLayout" runat="server" AutoGenerateColumns="False">
                         <Columns>
                             <asp:TemplateField HeaderText="FIXO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbxLinha" runat="server" Text='<%# Bind("ORDEM") %>' Width="40px"></asp:TextBox>
+                                    <asp:TextBox ID="tbxLinha" runat="server" Text='<%# Bind("FIXO") %>' Width="40px"></asp:TextBox>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="40px" />
                                 <ItemStyle Width="40px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="ORDEM" HeaderStyle-HorizontalAlign="Center">
+                         <%--   <asp:TemplateField HeaderText="ORDEM" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:TextBox ID="tbxOrdem" runat="server" Text='<%# Bind("ORDEM") %>' Width="40px"></asp:TextBox>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="40px" />
                                 <ItemStyle Width="40px" HorizontalAlign="Center" VerticalAlign="Middle" />
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="CAMPO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbxCampo" runat="server" Width="100px" Style="text-align: left"></asp:TextBox>
+                                    <asp:TextBox ID="tbxCampo" runat="server" Width="100px" Style="text-align: left" Text='<%# Bind("CAMPO") %>'></asp:TextBox>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="100px" />
                                 <ItemStyle Width="100px" HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -85,24 +88,24 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="TAMANHO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbxTamanho" runat="server" Text='<%# Bind("TAMANHO") %>' Width="50px"></asp:TextBox>
+                                    <asp:TextBox ID="tbxTamanho" runat="server" Text='<%# Bind("TAMANHO") %>' Width="50px" AutoPostBack="True" OnTextChanged="tbxTamanho_TextChanged"></asp:TextBox>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="50px" />
                                 <ItemStyle Width="50px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="INICIO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbxInicio" runat="server" Text='<%# Bind("INICIO") %>' Width="50px" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="tbxInicio" runat="server" Text='<%# Bind("INICIO") %>' Width="30px" Enabled="false"></asp:TextBox>
                                 </ItemTemplate>
-                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="50px" />
-                                <ItemStyle Width="50px" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="30px" />
+                                <ItemStyle Width="30px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="FIM" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbxFim" runat="server" Text='<%# Bind("FIM") %>' Width="50px" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="tbxFim" runat="server" Text='<%# Bind("FIM") %>' Width="30px" Enabled="false"></asp:TextBox>
                                 </ItemTemplate>
-                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="50px" />
-                                <ItemStyle Width="50px" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="30px" />
+                                <ItemStyle Width="30px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <%-- <asp:TemplateField HeaderText="COMPLETAR?" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
@@ -157,10 +160,24 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="DADO ACEITÁVEL?" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="tbxValorPadrao" runat="server" Width="90px"></asp:TextBox>
+                                    <asp:TextBox ID="tbxValorPadrao" runat="server" Width="90px" Text='<%# Bind("ACEITAVEL") %>'></asp:TextBox>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="90px" />
                                 <ItemStyle Width="90px" HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgAdicionarLinha" ImageUrl="~/Images/1410369120_Add.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgAdicionarLinha_Click" />
+                                </ItemTemplate>
+                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="15px" />
+                                <ItemStyle Width="15px" HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgRemoverLinha" ImageUrl="~/Images/1410369134_Delete.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgRemoverLinha_Click" />
+                                </ItemTemplate>
+                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="15px" />
+                                <ItemStyle Width="15px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>

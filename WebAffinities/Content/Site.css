@@ -836,6 +836,18 @@ p, h1, form, button {
         font-weight: bold;
     }
 
+     #stylized input[type='submit'] {
+        clear: both;
+        width: 125px;
+        height: 31px;
+        background: #666666 url(img/button.png) no-repeat;
+        text-align: center;
+        line-height: 31px;
+        color: #FFFFFF;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
     #stylized span {
         font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
         font-size: 11px;
@@ -1072,15 +1084,31 @@ linha {
         width: 140px;
     }
 
-    #stylizedEndosso input {
-        float: left;
-        font-size: 12px;
-        padding: 2px 2px;
-        border: solid 1px #aacfe4;
-        width: 150px;
-        height: 17px;
-        margin: 2px 10px 20px 10px;
-        display: inline-block;
+     #stylizedEndosso input[type="submit"] {
+        width: 105px;
+        height: 28px;
+        background: #666666 url(img/button.png) no-repeat;
+        text-align: center;
+        /*line-height: 31px;*/
+        margin: 0px 0px 0px 0px;
+        color: #FFFFFF;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+     #stylizedEndosso input[type="image"] {
+        width: 105px;
+        height: 28px;
+        text-align: center;
+        /*line-height: 31px;*/
+        margin: 0px 0px 0px 0px;
+        border: none;
+        color: #FFFFFF;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        background:none;
     }
 
     #stylizedEndosso select {
@@ -1096,6 +1124,17 @@ linha {
         font-weight: 400;
         font-size: 11px;
         vertical-align: middle;
+    }
+
+    #stylizedEndosso input {
+        float: left;
+        font-size: 12px;
+        padding: 2px 2px;
+        border: solid 1px #aacfe4;
+        width: 150px;
+        height: 17px;
+        margin: 2px 10px 20px 10px;
+        display: inline-block;
     }
 
     #stylizedEndosso button {
@@ -1148,7 +1187,7 @@ linha {
 }
 #MainContent_gdvLayout input[type="checkbox"] {
     clear:both;
-    width: auto;
+    width:auto;
 }
 #MainContent_gdvLayout select {
     margin:0px 0px 0px 0px;
