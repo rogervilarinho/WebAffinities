@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAffinities", "WebAffinit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOAffinities", "BOAffinities\BOAffinities.csproj", "{AB2DCE92-31E3-4D82-B104-6968614F7050}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAOAffinities", "DAOAffinities\DAOAffinities.csproj", "{E60F6740-DF16-46EB-BBCE-EDEE9F102E21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB2DCE92-31E3-4D82-B104-6968614F7050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E60F6740-DF16-46EB-BBCE-EDEE9F102E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E60F6740-DF16-46EB-BBCE-EDEE9F102E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E60F6740-DF16-46EB-BBCE-EDEE9F102E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E60F6740-DF16-46EB-BBCE-EDEE9F102E21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

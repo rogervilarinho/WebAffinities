@@ -1193,3 +1193,9 @@ linha {
     margin:0px 0px 0px 0px;
     text-align:center;
 }
+
+/*ESTILO CAMPO ERRO*/
+.ErrorControl {
+    background-color: #FBE3E4;
+    border: solid 1px Red;
+}

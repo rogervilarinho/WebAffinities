@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Produtos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="WebAffinities.Produto" %>
 
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
@@ -7,25 +8,29 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div id="stylizedEndosso" class="myform">
         <h1>Produto:</h1>
-        <p>Preencha os dados para validação de um arquivo para o produto em questão.</p>
+        <p>
+            Preencha os dados para validação de um arquivo para o produto em questão.</p>
         <div style="width: 100%">
             <fieldset>
                 <legend>Produto</legend>
                 <div style="width: 100%">
                     <div class="editor-label">
-                        <label>Nome do Produto: </label>
+                        <label>
+                        Nome do Produto: 
+                        </label>
                     </div>
                     <div class="editor-field">
                         <asp:TextBox ID="tbxProduto" runat="server" Width="400px" Text="RESIDENCIAL AFFINITY"></asp:TextBox>
                     </div>
                     <div class="editor-label">
-                        <label>Código do Produto:</label>
+                        <label>
+                        Código do Produto:</label>
                     </div>
                     <div class="editor-field">
                         <asp:TextBox ID="tbxCodigoProduto" runat="server" Width="50px" Text="525"></asp:TextBox>
                     </div>
                     <div class="editor-field">
-                         <asp:Button ID="btnCriarLayout" runat="server" Text="Criar Layout" OnClick="btnCriarLayout_Click" />
+                        <asp:Button ID="btnCriarLayout" runat="server" Text="Criar Layout" OnClick="btnCriarLayout_Click" />
                     </div>
                 </div>
                 <div style="clear: both; width: 100%;">
@@ -38,7 +43,7 @@
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="40px" />
                                 <ItemStyle Width="40px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
-                         <%--   <asp:TemplateField HeaderText="ORDEM" HeaderStyle-HorizontalAlign="Center">
+                            <%--   <asp:TemplateField HeaderText="ORDEM" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:TextBox ID="tbxOrdem" runat="server" Text='<%# Bind("ORDEM") %>' Width="40px"></asp:TextBox>
                                 </ItemTemplate>
@@ -54,23 +59,19 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="HIERARQUIA" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlHierarquia" runat="server" Width="100%">
-                                        <asp:ListItem Value="0" Selected="True">APÓLICE</asp:ListItem>
-                                        <asp:ListItem Value="1">ITEM</asp:ListItem>
-                                        <asp:ListItem Value="2">SEGURADO</asp:ListItem>
-                                        <asp:ListItem Value="3">COBERTURA</asp:ListItem>
-                                        <asp:ListItem Value="4">COBRANÇA</asp:ListItem>
+                                    <asp:DropDownList ID="ddlHierarquia" runat="server" Width="100%" OnSelectedIndexChanged="ddlHierarquia_SelectedIndexChanged" AutoPostBack="True" SelectedValue='<%# Bind("HIERARQUIA") %>' DataSourceID="clsHierarquia" DataTextField="NOM_HIERARQUIA" DataValueField="ID_HIERARQUIA">
                                     </asp:DropDownList>
+                                    <asp:ObjectDataSource ID="clsHierarquia" runat="server" SelectMethod="ListarHierarquia" TypeName="BOAffinities.Hierarquia"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="100px" />
                                 <ItemStyle Width="100px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="TIPO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%">
+                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%" SelectedValue='<%# Bind("TIPO") %>'>
                                         <asp:ListItem Value="1">TEXTO</asp:ListItem>
-                                        <asp:ListItem Value="0">NÚMERICO</asp:ListItem>
-                                        <asp:ListItem Value="2">MONETÁRIO</asp:ListItem>
+                                        <asp:ListItem Value="2">NÚMERICO</asp:ListItem>
+                                        <asp:ListItem Value="3">MONETÁRIO</asp:ListItem>
                                     </asp:DropDownList>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="90px" />
@@ -78,9 +79,9 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="OBRIGATÓRIO?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlObrigatorio" runat="server" Width="80px">
+                                    <asp:DropDownList ID="ddlObrigatorio" runat="server" Width="80px" SelectedValue='<%# Bind("OBRIGATORIO") %>'>
                                         <asp:ListItem Value="1">Sim</asp:ListItem>
-                                        <asp:ListItem Value="0">Não</asp:ListItem>
+                                        <asp:ListItem Value="2">Não</asp:ListItem>
                                     </asp:DropDownList>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="80px" />
@@ -136,8 +137,8 @@
                             </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="LISTA DE VALORES?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlListaValores" runat="server" Width="100%">
-                                        <asp:ListItem Value="0" Selected="True">- SELECIONE -</asp:ListItem>
+                                    <asp:DropDownList ID="ddlListaValores" runat="server" Width="100%" SelectedValue='<%# Bind("LISTA") %>'>
+                                        <asp:ListItem Value="-1" Selected="True">- SELECIONE -</asp:ListItem>
                                         <asp:ListItem Value="1">ATIVIDADES</asp:ListItem>
                                         <asp:ListItem Value="2">SEXO</asp:ListItem>
                                         <asp:ListItem Value="3">TIPO DE RISCO</asp:ListItem>
@@ -148,8 +149,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="VALIDAÇÃO?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlListaValidacao" runat="server" Width="100%">
-                                        <asp:ListItem Value="0" Selected="True">- SELECIONE -</asp:ListItem>
+                                    <asp:DropDownList ID="ddlListaValidacao" runat="server" Width="100%" SelectedValue='<%# Bind("VALIDACAO") %>'>
+                                        <asp:ListItem Value="-1" Selected="True">- SELECIONE -</asp:ListItem>
                                         <asp:ListItem Value="1">DATA</asp:ListItem>
                                         <asp:ListItem Value="2">CPF</asp:ListItem>
                                         <asp:ListItem Value="3">CNPJ</asp:ListItem>
@@ -165,14 +166,14 @@
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="90px" />
                                 <ItemStyle Width="90px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
+                            <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgAdicionarLinha" ImageUrl="~/Images/1410369120_Add.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgAdicionarLinha_Click" />
+                                    <asp:ImageButton ID="imgAdicionarLinha" CausesValidation="true" ImageUrl="~/Images/1410369120_Add.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgAdicionarLinha_Click" />
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="15px" />
                                 <ItemStyle Width="15px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
+                            <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="imgRemoverLinha" ImageUrl="~/Images/1410369134_Delete.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgRemoverLinha_Click" />
                                 </ItemTemplate>

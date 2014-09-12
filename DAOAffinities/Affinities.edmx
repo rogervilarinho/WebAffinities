@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AffinitiesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AffinitiesModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="AffinitiesModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_HIERARQUIA" EntityType="AffinitiesModel.Store.TB_HIERARQUIA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_LAYOUT_ARQUIVO" EntityType="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_LAYOUT_ARQUIVO_DETALHE" EntityType="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_LISTA" EntityType="AffinitiesModel.Store.TB_LISTA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_LISTA_DETALHE" EntityType="AffinitiesModel.Store.TB_LISTA_DETALHE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_PRODUTO" EntityType="AffinitiesModel.Store.TB_PRODUTO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_TIPO" EntityType="AffinitiesModel.Store.TB_TIPO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_VALIDACAO" EntityType="AffinitiesModel.Store.TB_VALIDACAO" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA">
+            <End Role="TB_HIERARQUIA" EntitySet="TB_HIERARQUIA" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
+            <End Role="TB_VALIDACAO" EntitySet="TB_VALIDACAO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1">
+            <End Role="TB_LAYOUT_ARQUIVO" EntitySet="TB_LAYOUT_ARQUIVO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
+            <End Role="TB_LISTA" EntitySet="TB_LISTA" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO">
+            <End Role="TB_TIPO" EntitySet="TB_TIPO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LISTA_DETALHE_TB_LISTA" Association="AffinitiesModel.Store.FK_TB_LISTA_DETALHE_TB_LISTA">
+            <End Role="TB_LISTA" EntitySet="TB_LISTA" />
+            <End Role="TB_LISTA_DETALHE" EntitySet="TB_LISTA_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO" Association="AffinitiesModel.Store.FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO">
+            <End Role="TB_LAYOUT_ARQUIVO" EntitySet="TB_LAYOUT_ARQUIVO" />
+            <End Role="TB_PRODUTO" EntitySet="TB_PRODUTO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TB_HIERARQUIA">
+          <Key>
+            <PropertyRef Name="ID_HIERARQUIA" />
+          </Key>
+          <Property Name="ID_HIERARQUIA" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_HIERARQUIA" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_LAYOUT_ARQUIVO">
+          <Key>
+            <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+          </Key>
+          <Property Name="ID_LAYOUT_ARQUIVO" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_LAYOUT_ARQUIVO" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_LAYOUT_ARQUIVO_DETALHE">
+          <Key>
+            <PropertyRef Name="ID_LAYOUT_ARQUIVO_DETALHE" />
+          </Key>
+          <Property Name="ID_LAYOUT_ARQUIVO_DETALHE" Type="int" Nullable="false" />
+          <Property Name="ID_LAYOUT_ARQUIVO" Type="int" Nullable="false" />
+          <Property Name="DES_FIXO" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DES_CAMPO" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_HIERARQUIA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO" Type="int" Nullable="false" />
+          <Property Name="ID_OBRIGATORIO" Type="int" Nullable="false" />
+          <Property Name="NUM_TAMANHO" Type="int" Nullable="false" />
+          <Property Name="NUM_INICIO" Type="int" Nullable="false" />
+          <Property Name="NUM_FIM" Type="int" Nullable="false" />
+          <Property Name="ID_LISTA" Type="int" Nullable="false" />
+          <Property Name="ID_VALICAO" Type="int" Nullable="false" />
+          <Property Name="DES_DADO_ACEITAVEL" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_LISTA">
+          <Key>
+            <PropertyRef Name="ID_LISTA" />
+          </Key>
+          <Property Name="ID_LISTA" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_LISTA" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DES_LISTA" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_LISTA_DETALHE">
+          <Key>
+            <PropertyRef Name="ID_LISTA_DETALHE" />
+          </Key>
+          <Property Name="ID_LISTA_DETALHE" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LISTA" Type="int" Nullable="false" />
+          <Property Name="DES_VALOR" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_PRODUTO">
+          <Key>
+            <PropertyRef Name="COD_PRODUTO" />
+          </Key>
+          <Property Name="COD_PRODUTO" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_PRODUTO" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_LAYOUT_ARQUIVO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_TIPO">
+          <Key>
+            <PropertyRef Name="ID_TIPO" />
+          </Key>
+          <Property Name="ID_TIPO" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_TIPO" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TB_VALIDACAO">
+          <Key>
+            <PropertyRef Name="ID_VALIDACAO" />
+          </Key>
+          <Property Name="ID_VALIDACAO" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_VALIDACAO" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA">
+          <End Role="TB_HIERARQUIA" Type="AffinitiesModel.Store.TB_HIERARQUIA" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_HIERARQUIA">
+              <PropertyRef Name="ID_HIERARQUIA" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_HIERARQUIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
+          <End Role="TB_VALIDACAO" Type="AffinitiesModel.Store.TB_VALIDACAO" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_VALIDACAO">
+              <PropertyRef Name="ID_VALIDACAO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_VALICAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1">
+          <End Role="TB_LAYOUT_ARQUIVO" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LAYOUT_ARQUIVO">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
+          <End Role="TB_LISTA" Type="AffinitiesModel.Store.TB_LISTA" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA">
+              <PropertyRef Name="ID_LISTA" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO">
+          <End Role="TB_TIPO" Type="AffinitiesModel.Store.TB_TIPO" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TIPO">
+              <PropertyRef Name="ID_TIPO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LISTA_DETALHE_TB_LISTA">
+          <End Role="TB_LISTA" Type="AffinitiesModel.Store.TB_LISTA" Multiplicity="1" />
+          <End Role="TB_LISTA_DETALHE" Type="AffinitiesModel.Store.TB_LISTA_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA">
+              <PropertyRef Name="ID_LISTA" />
+            </Principal>
+            <Dependent Role="TB_LISTA_DETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO">
+          <End Role="TB_LAYOUT_ARQUIVO" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO" Multiplicity="1" />
+          <End Role="TB_PRODUTO" Type="AffinitiesModel.Store.TB_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LAYOUT_ARQUIVO">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Principal>
+            <Dependent Role="TB_PRODUTO">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AffinitiesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AffinitiesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_HIERARQUIA" EntityType="AffinitiesModel.TB_HIERARQUIA" />
+          <EntitySet Name="TB_LAYOUT_ARQUIVO" EntityType="AffinitiesModel.TB_LAYOUT_ARQUIVO" />
+          <EntitySet Name="TB_LAYOUT_ARQUIVO_DETALHE" EntityType="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" />
+          <EntitySet Name="TB_LISTA" EntityType="AffinitiesModel.TB_LISTA" />
+          <EntitySet Name="TB_LISTA_DETALHE" EntityType="AffinitiesModel.TB_LISTA_DETALHE" />
+          <EntitySet Name="TB_PRODUTO" EntityType="AffinitiesModel.TB_PRODUTO" />
+          <EntitySet Name="TB_TIPO" EntityType="AffinitiesModel.TB_TIPO" />
+          <EntitySet Name="TB_VALIDACAO" EntityType="AffinitiesModel.TB_VALIDACAO" />
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA" Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA">
+            <End Role="TB_HIERARQUIA" EntitySet="TB_HIERARQUIA" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO" Association="AffinitiesModel.FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO">
+            <End Role="TB_LAYOUT_ARQUIVO" EntitySet="TB_LAYOUT_ARQUIVO" />
+            <End Role="TB_PRODUTO" EntitySet="TB_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
+            <End Role="TB_VALIDACAO" EntitySet="TB_VALIDACAO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
+            <End Role="TB_LISTA" EntitySet="TB_LISTA" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO">
+            <End Role="TB_TIPO" EntitySet="TB_TIPO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LISTA_DETALHE_TB_LISTA" Association="AffinitiesModel.FK_TB_LISTA_DETALHE_TB_LISTA">
+            <End Role="TB_LISTA" EntitySet="TB_LISTA" />
+            <End Role="TB_LISTA_DETALHE" EntitySet="TB_LISTA_DETALHE" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="AffinitiesModel.sysdiagrams" />
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1">
+            <End Role="TB_LAYOUT_ARQUIVO" EntitySet="TB_LAYOUT_ARQUIVO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TB_HIERARQUIA">
+          <Key>
+            <PropertyRef Name="ID_HIERARQUIA" />
+          </Key>
+          <Property Name="ID_HIERARQUIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_HIERARQUIA" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO_DETALHE" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA" FromRole="TB_HIERARQUIA" ToRole="TB_LAYOUT_ARQUIVO_DETALHE" />
+        </EntityType>
+        <EntityType Name="TB_LAYOUT_ARQUIVO">
+          <Key>
+            <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+          </Key>
+          <Property Name="ID_LAYOUT_ARQUIVO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_LAYOUT_ARQUIVO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="TB_PRODUTO" Relationship="AffinitiesModel.FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO" FromRole="TB_LAYOUT_ARQUIVO" ToRole="TB_PRODUTO" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO_DETALHE" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" FromRole="TB_LAYOUT_ARQUIVO" ToRole="TB_LAYOUT_ARQUIVO_DETALHE" />
+        </EntityType>
+        <EntityType Name="TB_LAYOUT_ARQUIVO_DETALHE">
+          <Key>
+            <PropertyRef Name="ID_LAYOUT_ARQUIVO_DETALHE" />
+          </Key>
+          <Property Name="ID_LAYOUT_ARQUIVO_DETALHE" Type="Int32" Nullable="false" />
+          <Property Name="ID_LAYOUT_ARQUIVO" Type="Int32" Nullable="false" />
+          <Property Name="DES_FIXO" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DES_CAMPO" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ID_HIERARQUIA" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="ID_OBRIGATORIO" Type="Int32" Nullable="false" />
+          <Property Name="NUM_TAMANHO" Type="Int32" Nullable="false" />
+          <Property Name="NUM_INICIO" Type="Int32" Nullable="false" />
+          <Property Name="NUM_FIM" Type="Int32" Nullable="false" />
+          <Property Name="ID_LISTA" Type="Int32" Nullable="false" />
+          <Property Name="ID_VALICAO" Type="Int32" Nullable="false" />
+          <Property Name="DES_DADO_ACEITAVEL" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="TB_HIERARQUIA" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_HIERARQUIA" />
+          <NavigationProperty Name="TB_VALIDACAO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_VALIDACAO" />
+          <NavigationProperty Name="TB_LISTA" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_LISTA" />
+          <NavigationProperty Name="TB_TIPO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_TIPO" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_LAYOUT_ARQUIVO" />
+        </EntityType>
+        <EntityType Name="TB_LISTA">
+          <Key>
+            <PropertyRef Name="ID_LISTA" />
+          </Key>
+          <Property Name="ID_LISTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_LISTA" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DES_LISTA" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO_DETALHE" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" FromRole="TB_LISTA" ToRole="TB_LAYOUT_ARQUIVO_DETALHE" />
+          <NavigationProperty Name="TB_LISTA_DETALHE" Relationship="AffinitiesModel.FK_TB_LISTA_DETALHE_TB_LISTA" FromRole="TB_LISTA" ToRole="TB_LISTA_DETALHE" />
+        </EntityType>
+        <EntityType Name="TB_LISTA_DETALHE">
+          <Key>
+            <PropertyRef Name="ID_LISTA_DETALHE" />
+          </Key>
+          <Property Name="ID_LISTA_DETALHE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LISTA" Type="Int32" Nullable="false" />
+          <Property Name="DES_VALOR" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TB_LISTA" Relationship="AffinitiesModel.FK_TB_LISTA_DETALHE_TB_LISTA" FromRole="TB_LISTA_DETALHE" ToRole="TB_LISTA" />
+        </EntityType>
+        <EntityType Name="TB_PRODUTO">
+          <Key>
+            <PropertyRef Name="COD_PRODUTO" />
+          </Key>
+          <Property Name="COD_PRODUTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_PRODUTO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID_LAYOUT_ARQUIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO" Relationship="AffinitiesModel.FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO" FromRole="TB_PRODUTO" ToRole="TB_LAYOUT_ARQUIVO" />
+        </EntityType>
+        <EntityType Name="TB_TIPO">
+          <Key>
+            <PropertyRef Name="ID_TIPO" />
+          </Key>
+          <Property Name="ID_TIPO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_TIPO" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO_DETALHE" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" FromRole="TB_TIPO" ToRole="TB_LAYOUT_ARQUIVO_DETALHE" />
+        </EntityType>
+        <EntityType Name="TB_VALIDACAO">
+          <Key>
+            <PropertyRef Name="ID_VALIDACAO" />
+          </Key>
+          <Property Name="ID_VALIDACAO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_VALIDACAO" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO_DETALHE" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" FromRole="TB_VALIDACAO" ToRole="TB_LAYOUT_ARQUIVO_DETALHE" />
+        </EntityType>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA">
+          <End Role="TB_HIERARQUIA" Type="AffinitiesModel.TB_HIERARQUIA" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_HIERARQUIA">
+              <PropertyRef Name="ID_HIERARQUIA" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_HIERARQUIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO">
+          <End Role="TB_LAYOUT_ARQUIVO" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO" Multiplicity="1" />
+          <End Role="TB_PRODUTO" Type="AffinitiesModel.TB_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LAYOUT_ARQUIVO">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Principal>
+            <Dependent Role="TB_PRODUTO">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
+          <End Role="TB_VALIDACAO" Type="AffinitiesModel.TB_VALIDACAO" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_VALIDACAO">
+              <PropertyRef Name="ID_VALIDACAO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_VALICAO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
+          <End Role="TB_LISTA" Type="AffinitiesModel.TB_LISTA" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA">
+              <PropertyRef Name="ID_LISTA" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO">
+          <End Role="TB_TIPO" Type="AffinitiesModel.TB_TIPO" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_TIPO">
+              <PropertyRef Name="ID_TIPO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LISTA_DETALHE_TB_LISTA">
+          <End Role="TB_LISTA" Type="AffinitiesModel.TB_LISTA" Multiplicity="1" />
+          <End Role="TB_LISTA_DETALHE" Type="AffinitiesModel.TB_LISTA_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LISTA">
+              <PropertyRef Name="ID_LISTA" />
+            </Principal>
+            <Dependent Role="TB_LISTA_DETALHE">
+              <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1">
+          <End Type="AffinitiesModel.TB_LAYOUT_ARQUIVO" Role="TB_LAYOUT_ARQUIVO" Multiplicity="1" />
+          <End Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Role="TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_LAYOUT_ARQUIVO">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AffinitiesModelStoreContainer" CdmEntityContainer="AffinitiesEntities">
+          <EntitySetMapping Name="TB_HIERARQUIA">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_HIERARQUIA">
+              <MappingFragment StoreEntitySet="TB_HIERARQUIA">
+                <ScalarProperty Name="ID_HIERARQUIA" ColumnName="ID_HIERARQUIA" />
+                <ScalarProperty Name="NOM_HIERARQUIA" ColumnName="NOM_HIERARQUIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LAYOUT_ARQUIVO">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_LAYOUT_ARQUIVO">
+              <MappingFragment StoreEntitySet="TB_LAYOUT_ARQUIVO">
+                <ScalarProperty Name="ID_LAYOUT_ARQUIVO" ColumnName="ID_LAYOUT_ARQUIVO" />
+                <ScalarProperty Name="NOM_LAYOUT_ARQUIVO" ColumnName="NOM_LAYOUT_ARQUIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LAYOUT_ARQUIVO_DETALHE">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE">
+              <MappingFragment StoreEntitySet="TB_LAYOUT_ARQUIVO_DETALHE">
+                <ScalarProperty Name="ID_LAYOUT_ARQUIVO_DETALHE" ColumnName="ID_LAYOUT_ARQUIVO_DETALHE" />
+                <ScalarProperty Name="ID_LAYOUT_ARQUIVO" ColumnName="ID_LAYOUT_ARQUIVO" />
+                <ScalarProperty Name="DES_FIXO" ColumnName="DES_FIXO" />
+                <ScalarProperty Name="DES_CAMPO" ColumnName="DES_CAMPO" />
+                <ScalarProperty Name="ID_HIERARQUIA" ColumnName="ID_HIERARQUIA" />
+                <ScalarProperty Name="ID_TIPO" ColumnName="ID_TIPO" />
+                <ScalarProperty Name="ID_OBRIGATORIO" ColumnName="ID_OBRIGATORIO" />
+                <ScalarProperty Name="NUM_TAMANHO" ColumnName="NUM_TAMANHO" />
+                <ScalarProperty Name="NUM_INICIO" ColumnName="NUM_INICIO" />
+                <ScalarProperty Name="NUM_FIM" ColumnName="NUM_FIM" />
+                <ScalarProperty Name="ID_LISTA" ColumnName="ID_LISTA" />
+                <ScalarProperty Name="ID_VALICAO" ColumnName="ID_VALICAO" />
+                <ScalarProperty Name="DES_DADO_ACEITAVEL" ColumnName="DES_DADO_ACEITAVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LISTA">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_LISTA">
+              <MappingFragment StoreEntitySet="TB_LISTA">
+                <ScalarProperty Name="ID_LISTA" ColumnName="ID_LISTA" />
+                <ScalarProperty Name="NOM_LISTA" ColumnName="NOM_LISTA" />
+                <ScalarProperty Name="DES_LISTA" ColumnName="DES_LISTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LISTA_DETALHE">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_LISTA_DETALHE">
+              <MappingFragment StoreEntitySet="TB_LISTA_DETALHE">
+                <ScalarProperty Name="ID_LISTA_DETALHE" ColumnName="ID_LISTA_DETALHE" />
+                <ScalarProperty Name="ID_LISTA" ColumnName="ID_LISTA" />
+                <ScalarProperty Name="DES_VALOR" ColumnName="DES_VALOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PRODUTO">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_PRODUTO">
+              <MappingFragment StoreEntitySet="TB_PRODUTO">
+                <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
+                <ScalarProperty Name="NOM_PRODUTO" ColumnName="NOM_PRODUTO" />
+                <ScalarProperty Name="ID_LAYOUT_ARQUIVO" ColumnName="ID_LAYOUT_ARQUIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_TIPO">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_TIPO">
+              <MappingFragment StoreEntitySet="TB_TIPO">
+                <ScalarProperty Name="ID_TIPO" ColumnName="ID_TIPO" />
+                <ScalarProperty Name="NOM_TIPO" ColumnName="NOM_TIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_VALIDACAO">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_VALIDACAO">
+              <MappingFragment StoreEntitySet="TB_VALIDACAO">
+                <ScalarProperty Name="ID_VALIDACAO" ColumnName="ID_VALIDACAO" />
+                <ScalarProperty Name="NOM_VALIDACAO" ColumnName="NOM_VALIDACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AffinitiesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

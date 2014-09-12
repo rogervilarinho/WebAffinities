@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d4c82230162d45d39feca88aba27b8c3" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="AffinitiesModel.TB_HIERARQUIA" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_LAYOUT_ARQUIVO" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_LISTA" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_LISTA_DETALHE" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_PRODUTO" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_TIPO" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_VALIDACAO" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA" ManuallyRouted="false" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_PRODUTO_TB_LAYOUT_ARQUIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" ManuallyRouted="false" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LISTA_DETALHE_TB_LISTA" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AffinitiesModel.sysdiagrams" Width="1.5" PointX="8.2696028278533387" PointY="9.5919522240720472" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
