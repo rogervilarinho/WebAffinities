@@ -20,14 +20,6 @@
             <End Role="TB_HIERARQUIA" EntitySet="TB_HIERARQUIA" />
             <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
-            <End Role="TB_VALIDACAO" EntitySet="TB_VALIDACAO" />
-            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1">
-            <End Role="TB_LAYOUT_ARQUIVO" EntitySet="TB_LAYOUT_ARQUIVO" />
-            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
             <End Role="TB_LISTA" EntitySet="TB_LISTA" />
             <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
@@ -38,6 +30,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO">
             <End Role="TB_TIPO" EntitySet="TB_TIPO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_VALIDACAO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_VALIDACAO">
+            <End Role="TB_VALIDACAO" EntitySet="TB_VALIDACAO" />
             <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_LISTA_DETALHE_TB_LISTA" Association="AffinitiesModel.Store.FK_TB_LISTA_DETALHE_TB_LISTA">
@@ -77,7 +73,7 @@
           <Key>
             <PropertyRef Name="ID_LAYOUT_ARQUIVO_DETALHE" />
           </Key>
-          <Property Name="ID_LAYOUT_ARQUIVO_DETALHE" Type="int" Nullable="false" />
+          <Property Name="ID_LAYOUT_ARQUIVO_DETALHE" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_LAYOUT_ARQUIVO" Type="int" Nullable="false" />
           <Property Name="DES_FIXO" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DES_CAMPO" Type="nvarchar" Nullable="false" MaxLength="50" />
@@ -87,9 +83,9 @@
           <Property Name="NUM_TAMANHO" Type="int" Nullable="false" />
           <Property Name="NUM_INICIO" Type="int" Nullable="false" />
           <Property Name="NUM_FIM" Type="int" Nullable="false" />
-          <Property Name="ID_LISTA" Type="int" Nullable="false" />
-          <Property Name="ID_VALICAO" Type="int" Nullable="false" />
-          <Property Name="DES_DADO_ACEITAVEL" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_LISTA" Type="int" />
+          <Property Name="ID_VALICAO" Type="int" />
+          <Property Name="DES_DADO_ACEITAVEL" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TB_LISTA">
           <Key>
@@ -148,32 +144,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
-          <End Role="TB_VALIDACAO" Type="AffinitiesModel.Store.TB_VALIDACAO" Multiplicity="1" />
-          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_VALIDACAO">
-              <PropertyRef Name="ID_VALIDACAO" />
-            </Principal>
-            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
-              <PropertyRef Name="ID_VALICAO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1">
-          <End Role="TB_LAYOUT_ARQUIVO" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO" Multiplicity="1" />
-          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_LAYOUT_ARQUIVO">
-              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
-            </Principal>
-            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
-              <PropertyRef Name="ID_LAYOUT_ARQUIVO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
-          <End Role="TB_LISTA" Type="AffinitiesModel.Store.TB_LISTA" Multiplicity="1" />
+          <End Role="TB_LISTA" Type="AffinitiesModel.Store.TB_LISTA" Multiplicity="0..1" />
           <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_LISTA">
@@ -205,6 +177,18 @@
             </Principal>
             <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
               <PropertyRef Name="ID_TIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_VALIDACAO">
+          <End Role="TB_VALIDACAO" Type="AffinitiesModel.Store.TB_VALIDACAO" Multiplicity="0..1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_VALIDACAO">
+              <PropertyRef Name="ID_VALIDACAO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_VALICAO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -311,9 +295,9 @@
           <Property Name="NUM_TAMANHO" Type="Int32" Nullable="false" />
           <Property Name="NUM_INICIO" Type="Int32" Nullable="false" />
           <Property Name="NUM_FIM" Type="Int32" Nullable="false" />
-          <Property Name="ID_LISTA" Type="Int32" Nullable="false" />
-          <Property Name="ID_VALICAO" Type="Int32" Nullable="false" />
-          <Property Name="DES_DADO_ACEITAVEL" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ID_LISTA" Type="Int32" />
+          <Property Name="ID_VALICAO" Type="Int32" />
+          <Property Name="DES_DADO_ACEITAVEL" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="TB_HIERARQUIA" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_HIERARQUIA" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_HIERARQUIA" />
           <NavigationProperty Name="TB_VALIDACAO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_VALIDACAO" />
           <NavigationProperty Name="TB_LISTA" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_LISTA" />
@@ -390,7 +374,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO">
-          <End Role="TB_VALIDACAO" Type="AffinitiesModel.TB_VALIDACAO" Multiplicity="1" />
+          <End Role="TB_VALIDACAO" Type="AffinitiesModel.TB_VALIDACAO" Multiplicity="0..1" />
           <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_VALIDACAO">
@@ -402,7 +386,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
-          <End Role="TB_LISTA" Type="AffinitiesModel.TB_LISTA" Multiplicity="1" />
+          <End Role="TB_LISTA" Type="AffinitiesModel.TB_LISTA" Multiplicity="0..1" />
           <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_LISTA">

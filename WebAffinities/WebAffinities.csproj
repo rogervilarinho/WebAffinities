@@ -312,6 +312,10 @@
       <Project>{ab2dce92-31e3-4d82-b104-6968614f7050}</Project>
       <Name>BOAffinities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAOAffinities\DAOAffinities.csproj">
+      <Project>{e60f6740-df16-46eb-bbce-edee9f102e21}</Project>
+      <Name>DAOAffinities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

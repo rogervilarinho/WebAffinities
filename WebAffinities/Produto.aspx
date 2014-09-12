@@ -32,6 +32,9 @@
                     <div class="editor-field">
                         <asp:Button ID="btnCriarLayout" runat="server" Text="Criar Layout" OnClick="btnCriarLayout_Click" />
                     </div>
+                    <div class="editor-field">
+                        <asp:Button ID="btnGravarLayout" runat="server" Text="Gravar Layout" OnClick="btnGravarLayout_Click" />
+                    </div>
                 </div>
                 <div style="clear: both; width: 100%;">
                     <asp:GridView ID="gdvLayout" runat="server" AutoGenerateColumns="False">
@@ -39,6 +42,7 @@
                             <asp:TemplateField HeaderText="FIXO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:TextBox ID="tbxLinha" runat="server" Text='<%# Bind("FIXO") %>' Width="40px"></asp:TextBox>
+                                    <asp:Label ID="lblLayoutArquivoDetalheId" runat="server" Text='<%# Bind("IDDETALHE") %>' Visible="false"></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="40px" />
                                 <ItemStyle Width="40px" HorizontalAlign="Center" VerticalAlign="Middle" />

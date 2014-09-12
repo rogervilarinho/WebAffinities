@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Hierarquia.cs" />
+    <Compile Include="LayoutArquivoDetalhe.cs" />
     <Compile Include="Lista.cs" />
     <Compile Include="Obrigatorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

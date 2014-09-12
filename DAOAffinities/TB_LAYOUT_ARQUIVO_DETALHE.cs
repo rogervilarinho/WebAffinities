@@ -24,8 +24,8 @@ namespace DAOAffinities
         public int NUM_TAMANHO { get; set; }
         public int NUM_INICIO { get; set; }
         public int NUM_FIM { get; set; }
-        public int ID_LISTA { get; set; }
-        public int ID_VALICAO { get; set; }
+        public Nullable<int> ID_LISTA { get; set; }
+        public Nullable<int> ID_VALICAO { get; set; }
         public string DES_DADO_ACEITAVEL { get; set; }
     
         public virtual TB_HIERARQUIA TB_HIERARQUIA { get; set; }

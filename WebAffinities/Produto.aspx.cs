@@ -14,8 +14,18 @@ namespace WebAffinities
         {
             if (!IsPostBack)
             {
+                //VERIFICA SE O LAYOUT DO PRODUTO CONSULTADO JÁ EXISTE
+                var layout = BOAffinities.LayoutArquivoDetalhe.ListarLayoutArquivoDetalhe(1);
                 DataTable dtt = new DataTable();
                 ViewState.Add("LAYOUT", dtt);
+                if (layout.Count() > 0)
+                {
+                    //JOGA OS VALORES NO DATA TABLE
+                    SetarListaParaDataTable(layout, dtt);
+                }
+
+                AtualizarDataGrid(dtt);
+                
                 //dtt.Columns.Add(new DataColumn("ORDEM"));
                 //dtt.Columns.Add(new DataColumn("HIERARQUIA"));
                 //dtt.Columns.Add(new DataColumn("TIPO"));
@@ -39,6 +49,31 @@ namespace WebAffinities
                 //gdvLayout.DataSource = dtt;
                 //gdvLayout.DataBind();
             }
+        }
+
+        private void SetarListaParaDataTable(IEnumerable<DAOAffinities.TB_LAYOUT_ARQUIVO_DETALHE> layout, DataTable dtt)
+        {
+            SetarColunasDataTable(dtt);
+            foreach (var item in layout.OrderBy(x => x.ID_HIERARQUIA))
+            {
+                DataRow dr = dtt.NewRow();
+                dr["FIXO"] = item.DES_FIXO;
+                dr["CAMPO"] = item.DES_CAMPO;
+                dr["TAMANHO"] = item.NUM_TAMANHO;
+                dr["INICIO"] = item.NUM_INICIO;
+                dr["FIM"] = item.NUM_FIM;
+                dr["ACEITAVEL"] = item.DES_DADO_ACEITAVEL;
+                dr["HIERARQUIA"] = item.ID_HIERARQUIA;
+                dr["TIPO"] = item.ID_TIPO;
+                dr["OBRIGATORIO"] = item.ID_OBRIGATORIO;
+                //TRATA VALORES NULOS PARA SETAR O MENOS -1
+                dr["VALIDACAO"] = item.ID_VALICAO.HasValue ? item.ID_VALICAO : -1;
+                dr["LISTA"] = item.ID_LISTA.HasValue ? item.ID_LISTA : -1;
+                dr["IDDETALHE"] = item.ID_LAYOUT_ARQUIVO_DETALHE;
+                dtt.Rows.Add(dr);
+            }
+
+            SetarDataTableViewState(dtt);
         }
 
         protected void ddlAutoCompletar_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,11 +122,15 @@ namespace WebAffinities
 
             if (!String.IsNullOrEmpty(tbx.Text))
             {
-                SetarPosicoesGRID(sender);
+                SetarPosicoesGRID(sender, true, "ddlListaValores");
             }
         }
 
         private void SetarPosicoesGRID(object sender)
+        {
+            SetarPosicoesGRID(sender, false, string.Empty);
+        }
+        private void SetarPosicoesGRID(object sender, bool setarFoco, string controle)
         {
             int posicao = 1;
             int hierarquia = 0;
@@ -138,8 +177,8 @@ namespace WebAffinities
                     dicHierarquia[hierarquia] = Convert.ToInt32(tbxFim.Text);
                 }
             }
-
-            SetarFocusCampoTipo(sender, "ddlListaValores");
+            if(setarFoco)
+            SetarFocusCampoTipo(sender, controle);
         }
 
         public void SetarPosicaoLinhaUm()
@@ -155,6 +194,20 @@ namespace WebAffinities
         protected void btnCriarLayout_Click(object sender, EventArgs e)
         {
             DataTable dtt = RecuperarDataTableViewState();
+            SetarColunasDataTable(dtt);
+
+            for (int i = 0; i < 1; i++)
+            {
+                DataRow dr = dtt.NewRow();
+                SetarValoresLinha(dr);
+                dtt.Rows.Add(dr);
+            }
+
+            AtualizarDataGrid(dtt);
+        }
+
+        private void SetarColunasDataTable(DataTable dtt)
+        {
             dtt.Columns.Add(new DataColumn("FIXO"));
             dtt.Columns.Add(new DataColumn("CAMPO"));
             dtt.Columns.Add(new DataColumn("TAMANHO"));
@@ -166,15 +219,7 @@ namespace WebAffinities
             dtt.Columns.Add(new DataColumn("OBRIGATORIO"));
             dtt.Columns.Add(new DataColumn("VALIDACAO"));
             dtt.Columns.Add(new DataColumn("LISTA"));
-
-            for (int i = 0; i < 1; i++)
-            {
-                DataRow dr = dtt.NewRow();
-                SetarValoresLinha(dr);
-                dtt.Rows.Add(dr);
-            }
-
-            AtualizarDataGrid(dtt);
+            dtt.Columns.Add(new DataColumn("IDDETALHE"));
         }
 
         public void SetarValoresLinha(DataRow dr)
@@ -198,6 +243,8 @@ namespace WebAffinities
             //PEGA A LINHA QUE TEVE O CLICK
             GridViewRow row = (GridViewRow)imgButton.Parent.Parent;
 
+            //PEGA A LISTA ORDENADA
+            
             //PEGA O DATATABLE E INSERE A LINHA
             DataTable dtt = RecuperarDataTableViewState();
 
@@ -250,6 +297,7 @@ namespace WebAffinities
                 DropDownList ddlObrigatorio = (DropDownList)row.FindControl("ddlObrigatorio");
                 DropDownList ddlListaValidacao = (DropDownList)row.FindControl("ddlListaValidacao");
                 DropDownList ddlListaValores = (DropDownList)row.FindControl("ddlListaValores");
+                Label lblLayoutArquivoDetalheId = (Label)row.FindControl("lblLayoutArquivoDetalheId");
 
                 dtt.Rows[row.RowIndex]["FIXO"] = tbxLinha.Text;
                 dtt.Rows[row.RowIndex]["CAMPO"] = tbxCampo.Text;
@@ -262,6 +310,8 @@ namespace WebAffinities
                 dtt.Rows[row.RowIndex]["OBRIGATORIO"] = ddlObrigatorio.SelectedValue;
                 dtt.Rows[row.RowIndex]["VALIDACAO"] = ddlListaValidacao.SelectedValue;
                 dtt.Rows[row.RowIndex]["LISTA"] = ddlListaValores.SelectedValue;
+                if(!String.IsNullOrEmpty(lblLayoutArquivoDetalheId.Text))
+                dtt.Rows[row.RowIndex]["IDDETALHE"] = Convert.ToInt32(lblLayoutArquivoDetalheId.Text);
             }
 
             AtualizarDataGrid(dtt);
@@ -279,6 +329,14 @@ namespace WebAffinities
             //PEGA A LINHA QUE TEVE O CLICK
             GridViewRow row = (GridViewRow)imgButton.Parent.Parent;
 
+            //REMOVE A LISTA DA BASE
+            Label lblLayoutArquivoDetalheId = (Label)row.FindControl("lblLayoutArquivoDetalheId");
+
+            if (!String.IsNullOrEmpty(lblLayoutArquivoDetalheId.Text))
+            {
+                BOAffinities.LayoutArquivoDetalhe.DeletarLayoutArquivoDetalhe(Convert.ToInt32(lblLayoutArquivoDetalheId.Text));
+            }
+
             //PEGA O DATATABLE E INSERE A LINHA
             DataTable dtt = RecuperarDataTableViewState();
 
@@ -286,6 +344,12 @@ namespace WebAffinities
 
             //ATUALIZAR GRID
             AtualizarDataGrid(dtt);
+
+            //ATUALIZA A NUMERACAO
+            SetarPosicoesGRID(sender);
+
+            //GRAVA TODA A TABELA NOVAMNETE.
+            GravarGridBD();
         }
 
         public void SetarDataTableViewState(DataTable dtt)
@@ -315,6 +379,69 @@ namespace WebAffinities
                 Control ctl = (Control)row.FindControl(campo);
                 ctl.Focus();
             }
+        }
+
+        protected void btnGravarLayout_Click(object sender, EventArgs e)
+        {
+            GravarGridBD();
+        }
+
+        private void GravarGridBD()
+        {
+            List<DAOAffinities.TB_LAYOUT_ARQUIVO_DETALHE> layout = new List<DAOAffinities.TB_LAYOUT_ARQUIVO_DETALHE>();
+            //CAPTURA OS VALORES E GRAVA O LAYOUT
+            foreach (GridViewRow row in gdvLayout.Rows)
+            {
+                TextBox tbxLinha = (TextBox)row.FindControl("tbxLinha");
+                TextBox tbxCampo = (TextBox)row.FindControl("tbxCampo");
+                TextBox tbxTamanho = (TextBox)row.FindControl("tbxTamanho");
+                TextBox tbxInicio = (TextBox)row.FindControl("tbxInicio");
+                TextBox tbxFim = (TextBox)row.FindControl("tbxFim");
+                TextBox tbxValorPadrao = (TextBox)row.FindControl("tbxValorPadrao");
+                DropDownList ddlHierarquia = (DropDownList)row.FindControl("ddlHierarquia");
+                DropDownList ddlTipo = (DropDownList)row.FindControl("ddlTipo");
+                DropDownList ddlObrigatorio = (DropDownList)row.FindControl("ddlObrigatorio");
+                DropDownList ddlListaValidacao = (DropDownList)row.FindControl("ddlListaValidacao");
+                DropDownList ddlListaValores = (DropDownList)row.FindControl("ddlListaValores");
+                Label lblLayoutArquivoDetalheId = (Label)row.FindControl("lblLayoutArquivoDetalheId");
+
+                int layoutArquivoId = 1;
+                string desFixo = tbxLinha.Text.ToUpper();
+                string desCampo = tbxCampo.Text.ToUpper();
+                int hierarquiaId = Convert.ToInt32(ddlHierarquia.SelectedValue);
+                int tipoId = Convert.ToInt32(ddlTipo.SelectedValue);
+                int obrigatorioId = Convert.ToInt32(ddlObrigatorio.SelectedValue);
+                int tamanho = Convert.ToInt32(tbxTamanho.Text);
+                int inicio = Convert.ToInt32(tbxInicio.Text);
+                int fim = Convert.ToInt32(tbxFim.Text);
+                int? listaValoresId = Convert.ToInt32(ddlListaValores.SelectedValue);
+                if (listaValoresId == -1) listaValoresId = null;
+                int? listaValidacaoId = Convert.ToInt32(ddlListaValidacao.SelectedValue);
+                if (listaValidacaoId == -1) listaValidacaoId = null;
+                string valorPadrao = tbxValorPadrao.Text.ToUpper();
+                int layoutArquivoDetalheId = 0;
+                if (!String.IsNullOrEmpty(lblLayoutArquivoDetalheId.Text))
+                    layoutArquivoDetalheId = Convert.ToInt32(lblLayoutArquivoDetalheId.Text);
+
+                layout.Add(new DAOAffinities.TB_LAYOUT_ARQUIVO_DETALHE()
+                {
+                    ID_LAYOUT_ARQUIVO = layoutArquivoId,
+                    DES_FIXO = desFixo,
+                    DES_CAMPO = desCampo,
+                    ID_HIERARQUIA = hierarquiaId,
+                    ID_TIPO = tipoId,
+                    ID_OBRIGATORIO = obrigatorioId,
+                    NUM_TAMANHO = tamanho,
+                    NUM_INICIO = inicio,
+                    NUM_FIM = fim,
+                    ID_LISTA = listaValoresId,
+                    ID_VALICAO = listaValidacaoId,
+                    DES_DADO_ACEITAVEL = valorPadrao,
+                    ID_LAYOUT_ARQUIVO_DETALHE = layoutArquivoDetalheId
+                });
+            }
+
+            BOAffinities.LayoutArquivoDetalhe.GravarLayoutArquivoDetalhe(layout);
         }
     }
 }
