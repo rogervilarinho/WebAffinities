@@ -5,15 +5,15 @@ using System.Text;
 
 namespace DAOAffinities
 {
-    public static class Hierarquia
+    public static class Obrigatorio
     {
-        public static IEnumerable<TB_HIERARQUIA> ListarHierarquia()
+        public static IEnumerable<TB_OBRIGATORIO> ListarObrigatorio()
         {
             try
             {
                 using (AffinitiesEntities db = new AffinitiesEntities())
                 {
-                    return db.TB_HIERARQUIA.ToList();
+                    return db.TB_OBRIGATORIO.ToList();
                 }
             }
             catch

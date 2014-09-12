@@ -5,15 +5,17 @@ using System.Text;
 
 namespace DAOAffinities
 {
-    public static class Hierarquia
+    public static class Lista
     {
-        public static IEnumerable<TB_HIERARQUIA> ListarHierarquia()
+        public static IEnumerable<TB_LISTA> ListarLista()
         {
             try
             {
                 using (AffinitiesEntities db = new AffinitiesEntities())
                 {
-                    return db.TB_HIERARQUIA.ToList();
+                    var lista = db.TB_LISTA.ToList();
+                    lista.Insert(0, new TB_LISTA() { ID_LISTA = -1, NOM_LISTA = "- SELECIONE -" });
+                    return lista;
                 }
             }
             catch

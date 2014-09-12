@@ -68,21 +68,16 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="TIPO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%" SelectedValue='<%# Bind("TIPO") %>'>
-                                        <asp:ListItem Value="1">TEXTO</asp:ListItem>
-                                        <asp:ListItem Value="2">NÚMERICO</asp:ListItem>
-                                        <asp:ListItem Value="3">MONETÁRIO</asp:ListItem>
-                                    </asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%" SelectedValue='<%# Bind("TIPO") %>' DataSourceID="clsTipo" DataTextField="NOM_TIPO" DataValueField="ID_TIPO"></asp:DropDownList>
+                                    <asp:ObjectDataSource ID="clsTipo" runat="server" SelectMethod="ListarHierarquia" TypeName="BOAffinities.Tipo"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="90px" />
                                 <ItemStyle Width="90px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="OBRIGATÓRIO?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlObrigatorio" runat="server" Width="80px" SelectedValue='<%# Bind("OBRIGATORIO") %>'>
-                                        <asp:ListItem Value="1">Sim</asp:ListItem>
-                                        <asp:ListItem Value="2">Não</asp:ListItem>
-                                    </asp:DropDownList>
+                                    <asp:DropDownList ID="ddlObrigatorio" runat="server" Width="80px" SelectedValue='<%# Bind("OBRIGATORIO") %>' DataSourceID="clsObrigatorio" DataTextField="NOM_OBRIGATORIO" DataValueField="ID_OBRIGATORIO"></asp:DropDownList>
+                                    <asp:ObjectDataSource ID="clsObrigatorio" runat="server" SelectMethod="ListarObrigatorio" TypeName="DAOAffinities.Obrigatorio"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="80px" />
                                 <ItemStyle Width="80px" HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -137,24 +132,18 @@
                             </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="LISTA DE VALORES?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlListaValores" runat="server" Width="100%" SelectedValue='<%# Bind("LISTA") %>'>
-                                        <asp:ListItem Value="-1" Selected="True">- SELECIONE -</asp:ListItem>
-                                        <asp:ListItem Value="1">ATIVIDADES</asp:ListItem>
-                                        <asp:ListItem Value="2">SEXO</asp:ListItem>
-                                        <asp:ListItem Value="3">TIPO DE RISCO</asp:ListItem>
+                                    <asp:DropDownList ID="ddlListaValores" runat="server" Width="100%" SelectedValue='<%# Bind("LISTA") %>' DataSourceID="clsLista" DataTextField="NOM_LISTA" DataValueField="ID_LISTA">
                                     </asp:DropDownList>
+                                    <asp:ObjectDataSource ID="clsLista" runat="server" SelectMethod="ListarLista" TypeName="BOAffinities.Lista"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="110px" />
                                 <ItemStyle Width="110px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="VALIDAÇÃO?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlListaValidacao" runat="server" Width="100%" SelectedValue='<%# Bind("VALIDACAO") %>'>
-                                        <asp:ListItem Value="-1" Selected="True">- SELECIONE -</asp:ListItem>
-                                        <asp:ListItem Value="1">DATA</asp:ListItem>
-                                        <asp:ListItem Value="2">CPF</asp:ListItem>
-                                        <asp:ListItem Value="3">CNPJ</asp:ListItem>
+                                    <asp:DropDownList ID="ddlListaValidacao" runat="server" Width="100%" SelectedValue='<%# Bind("VALIDACAO") %>' DataSourceID="clsValidacao" DataTextField="NOM_VALIDACAO" DataValueField="ID_VALIDACAO">
                                     </asp:DropDownList>
+                                    <asp:ObjectDataSource runat="server" ID="clsValidacao" SelectMethod="ListarValidacao" TypeName="BOAffinities.Validacao"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="100px" />
                                 <ItemStyle Width="100px" HorizontalAlign="Center" VerticalAlign="Middle" />

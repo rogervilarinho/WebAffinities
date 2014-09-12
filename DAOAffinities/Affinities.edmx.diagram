@@ -21,6 +21,8 @@
         <AssociationConnector Association="AffinitiesModel.FK_TB_LISTA_DETALHE_TB_LISTA" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AffinitiesModel.sysdiagrams" Width="1.5" PointX="8.2696028278533387" PointY="9.5919522240720472" />
         <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" />
+        <EntityTypeShape EntityType="AffinitiesModel.TB_OBRIGATORIO" Width="1.5" PointX="5.75" PointY="9.5" />
+        <AssociationConnector Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

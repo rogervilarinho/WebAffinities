@@ -1,18 +1,18 @@
-﻿using System;
+﻿using DAOAffinities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DAOAffinities;
 
 namespace BOAffinities
 {
-    public class Hierarquia
+    public static class Tipo
     {
-        public IEnumerable<TB_HIERARQUIA> ListarHierarquia()
+        public static IEnumerable<TB_TIPO> ListarHierarquia()
         {
             try
             {
-                return DAOAffinities.Hierarquia.ListarHierarquia();
+                return DAOAffinities.Tipo.ListarTipo();
             }
             catch
             {

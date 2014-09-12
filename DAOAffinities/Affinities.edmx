@@ -12,6 +12,7 @@
           <EntitySet Name="TB_LAYOUT_ARQUIVO_DETALHE" EntityType="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TB_LISTA" EntityType="AffinitiesModel.Store.TB_LISTA" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TB_LISTA_DETALHE" EntityType="AffinitiesModel.Store.TB_LISTA_DETALHE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TB_OBRIGATORIO" EntityType="AffinitiesModel.Store.TB_OBRIGATORIO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TB_PRODUTO" EntityType="AffinitiesModel.Store.TB_PRODUTO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TB_TIPO" EntityType="AffinitiesModel.Store.TB_TIPO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TB_VALIDACAO" EntityType="AffinitiesModel.Store.TB_VALIDACAO" store:Type="Tables" Schema="dbo" />
@@ -29,6 +30,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA">
             <End Role="TB_LISTA" EntitySet="TB_LISTA" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO">
+            <End Role="TB_OBRIGATORIO" EntitySet="TB_OBRIGATORIO" />
             <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
           </AssociationSet>
           <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" Association="AffinitiesModel.Store.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO">
@@ -102,6 +107,13 @@
           <Property Name="ID_LISTA" Type="int" Nullable="false" />
           <Property Name="DES_VALOR" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TB_OBRIGATORIO">
+          <Key>
+            <PropertyRef Name="ID_OBRIGATORIO" />
+          </Key>
+          <Property Name="ID_OBRIGATORIO" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_OBRIGATORIO" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TB_PRODUTO">
           <Key>
             <PropertyRef Name="COD_PRODUTO" />
@@ -169,6 +181,18 @@
             </Principal>
             <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
               <PropertyRef Name="ID_LISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO">
+          <End Role="TB_OBRIGATORIO" Type="AffinitiesModel.Store.TB_OBRIGATORIO" Multiplicity="1" />
+          <End Role="TB_LAYOUT_ARQUIVO_DETALHE" Type="AffinitiesModel.Store.TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_OBRIGATORIO">
+              <PropertyRef Name="ID_OBRIGATORIO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_OBRIGATORIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,6 +274,11 @@
             <End Role="TB_LAYOUT_ARQUIVO" EntitySet="TB_LAYOUT_ARQUIVO" />
             <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
           </AssociationSet>
+          <EntitySet Name="TB_OBRIGATORIO" EntityType="AffinitiesModel.TB_OBRIGATORIO" />
+          <AssociationSet Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO" Association="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO">
+            <End Role="TB_OBRIGATORIO" EntitySet="TB_OBRIGATORIO" />
+            <End Role="TB_LAYOUT_ARQUIVO_DETALHE" EntitySet="TB_LAYOUT_ARQUIVO_DETALHE" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TB_HIERARQUIA">
           <Key>
@@ -290,6 +319,7 @@
           <NavigationProperty Name="TB_LISTA" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LISTA" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_LISTA" />
           <NavigationProperty Name="TB_TIPO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_TIPO" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_TIPO" />
           <NavigationProperty Name="TB_LAYOUT_ARQUIVO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_LAYOUT_ARQUIVO1" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_LAYOUT_ARQUIVO" />
+          <NavigationProperty Name="TB_OBRIGATORIO" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO" FromRole="TB_LAYOUT_ARQUIVO_DETALHE" ToRole="TB_OBRIGATORIO" />
         </EntityType>
         <EntityType Name="TB_LISTA">
           <Key>
@@ -429,6 +459,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TB_OBRIGATORIO">
+          <Key>
+            <PropertyRef Name="ID_OBRIGATORIO" />
+          </Key>
+          <Property Type="Int32" Name="ID_OBRIGATORIO" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOM_OBRIGATORIO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_LAYOUT_ARQUIVO_DETALHE" Relationship="AffinitiesModel.FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO" FromRole="TB_OBRIGATORIO" ToRole="TB_LAYOUT_ARQUIVO_DETALHE" />
+        </EntityType>
+        <Association Name="FK_TB_LAYOUT_ARQUIVO_DETALHE_TB_OBRIGATORIO">
+          <End Type="AffinitiesModel.TB_OBRIGATORIO" Role="TB_OBRIGATORIO" Multiplicity="1" />
+          <End Type="AffinitiesModel.TB_LAYOUT_ARQUIVO_DETALHE" Role="TB_LAYOUT_ARQUIVO_DETALHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_OBRIGATORIO">
+              <PropertyRef Name="ID_OBRIGATORIO" />
+            </Principal>
+            <Dependent Role="TB_LAYOUT_ARQUIVO_DETALHE">
+              <PropertyRef Name="ID_OBRIGATORIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -521,6 +571,14 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_OBRIGATORIO">
+            <EntityTypeMapping TypeName="AffinitiesModel.TB_OBRIGATORIO">
+              <MappingFragment StoreEntitySet="TB_OBRIGATORIO">
+                <ScalarProperty Name="NOM_OBRIGATORIO" ColumnName="NOM_OBRIGATORIO" />
+                <ScalarProperty Name="ID_OBRIGATORIO" ColumnName="ID_OBRIGATORIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

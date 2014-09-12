@@ -34,5 +34,6 @@ namespace DAOAffinities
         public DbSet<TB_TIPO> TB_TIPO { get; set; }
         public DbSet<TB_VALIDACAO> TB_VALIDACAO { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<TB_OBRIGATORIO> TB_OBRIGATORIO { get; set; }
     }
 }
