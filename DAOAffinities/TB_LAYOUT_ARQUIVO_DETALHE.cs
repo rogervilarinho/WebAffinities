@@ -29,10 +29,9 @@ namespace DAOAffinities
         public string DES_DADO_ACEITAVEL { get; set; }
     
         public virtual TB_HIERARQUIA TB_HIERARQUIA { get; set; }
-        public virtual TB_VALIDACAO TB_VALIDACAO { get; set; }
         public virtual TB_LISTA TB_LISTA { get; set; }
-        public virtual TB_TIPO TB_TIPO { get; set; }
-        public virtual TB_LAYOUT_ARQUIVO TB_LAYOUT_ARQUIVO { get; set; }
         public virtual TB_OBRIGATORIO TB_OBRIGATORIO { get; set; }
+        public virtual TB_TIPO TB_TIPO { get; set; }
+        public virtual TB_VALIDACAO TB_VALIDACAO { get; set; }
     }
 }

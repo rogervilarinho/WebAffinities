@@ -30,10 +30,9 @@ namespace DAOAffinities
         public DbSet<TB_LAYOUT_ARQUIVO_DETALHE> TB_LAYOUT_ARQUIVO_DETALHE { get; set; }
         public DbSet<TB_LISTA> TB_LISTA { get; set; }
         public DbSet<TB_LISTA_DETALHE> TB_LISTA_DETALHE { get; set; }
+        public DbSet<TB_OBRIGATORIO> TB_OBRIGATORIO { get; set; }
         public DbSet<TB_PRODUTO> TB_PRODUTO { get; set; }
         public DbSet<TB_TIPO> TB_TIPO { get; set; }
         public DbSet<TB_VALIDACAO> TB_VALIDACAO { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public DbSet<TB_OBRIGATORIO> TB_OBRIGATORIO { get; set; }
     }
 }

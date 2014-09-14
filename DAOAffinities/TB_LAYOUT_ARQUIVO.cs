@@ -17,13 +17,11 @@ namespace DAOAffinities
         public TB_LAYOUT_ARQUIVO()
         {
             this.TB_PRODUTO = new HashSet<TB_PRODUTO>();
-            this.TB_LAYOUT_ARQUIVO_DETALHE = new HashSet<TB_LAYOUT_ARQUIVO_DETALHE>();
         }
     
         public int ID_LAYOUT_ARQUIVO { get; set; }
         public string NOM_LAYOUT_ARQUIVO { get; set; }
     
         public virtual ICollection<TB_PRODUTO> TB_PRODUTO { get; set; }
-        public virtual ICollection<TB_LAYOUT_ARQUIVO_DETALHE> TB_LAYOUT_ARQUIVO_DETALHE { get; set; }
     }
 }
