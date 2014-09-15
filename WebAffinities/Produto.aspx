@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Produtos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="WebAffinities.Produto" %>
+﻿<%@ Page Title="Produtos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="WebAffinities.Produto" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -36,6 +36,11 @@
                         <asp:Button ID="btnGravarLayout" runat="server" Text="Gravar Layout" OnClick="btnGravarLayout_Click" />
                     </div>
                 </div>
+                <br />
+                <div class="editor-field">
+                        <asp:Button ID="btnValidar" runat="server" Text="Validar Layout" OnClick="btnValidar_Click" />
+                    </div>
+                <br />
                 <div style="clear: both; width: 100%;">
                     <asp:GridView ID="gdvLayout" runat="server" AutoGenerateColumns="False">
                         <Columns>

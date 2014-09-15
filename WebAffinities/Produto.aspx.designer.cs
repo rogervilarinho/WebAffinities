@@ -49,6 +49,15 @@ namespace WebAffinities {
         protected global::System.Web.UI.WebControls.Button btnGravarLayout;
         
         /// <summary>
+        /// btnValidar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnValidar;
+        
+        /// <summary>
         /// gdvLayout control.
         /// </summary>
         /// <remarks>

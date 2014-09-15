@@ -14,41 +14,22 @@ namespace WebAffinities
         {
             if (!IsPostBack)
             {
-                //VERIFICA SE O LAYOUT DO PRODUTO CONSULTADO JÁ EXISTE
-                var layout = BOAffinities.LayoutArquivoDetalhe.ListarLayoutArquivoDetalhe(1);
                 DataTable dtt = new DataTable();
                 ViewState.Add("LAYOUT", dtt);
-                if (layout.Count() > 0)
-                {
-                    //JOGA OS VALORES NO DATA TABLE
-                    SetarListaParaDataTable(layout, dtt);
-                }
-
-                AtualizarDataGrid(dtt);
-                
-                //dtt.Columns.Add(new DataColumn("ORDEM"));
-                //dtt.Columns.Add(new DataColumn("HIERARQUIA"));
-                //dtt.Columns.Add(new DataColumn("TIPO"));
-                //dtt.Columns.Add(new DataColumn("OBRIGATORIO", typeof(Boolean)));
-                //dtt.Columns.Add(new DataColumn("TAMANHO"));
-                //dtt.Columns.Add(new DataColumn("INICIO"));
-                //dtt.Columns.Add(new DataColumn("FIM"));
-                //for (int i = 1; i < 10; i++)
-                //{
-                //    DataRow dr = dtt.NewRow();
-                //    dtt.Rows.Add(dr);
-                //    dr["ORDEM"] = i.ToString();
-                //    dr["HIERARQUIA"] = "APÓLICE";
-                //    dr["TIPO"] = "TEXTO";
-                //    dr["OBRIGATORIO"] = true;
-                //    dr["TAMANHO"] = i.ToString();
-                //    dr["INICIO"] = i;
-                //    dr["FIM"] = i + i;
-                //}
-
-                //gdvLayout.DataSource = dtt;
-                //gdvLayout.DataBind();
+                AtualizarGridBD(dtt);
             }
+        }
+
+        public void AtualizarGridBD(DataTable dtt)
+        {
+            var layout = BOAffinities.LayoutArquivoDetalhe.ListarLayoutArquivoDetalhe(1);
+            dtt.Clear();
+            if (layout.Count() > 0)
+            {
+                //JOGA OS VALORES NO DATA TABLE
+                SetarListaParaDataTable(layout, dtt);
+            }
+            AtualizarDataGrid(dtt);
         }
 
         private void SetarListaParaDataTable(IEnumerable<DAOAffinities.TB_LAYOUT_ARQUIVO_DETALHE> layout, DataTable dtt)
@@ -79,14 +60,14 @@ namespace WebAffinities
         protected void ddlAutoCompletar_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddl = (DropDownList)sender;
-            
+
             //PEGA A LINHA DO GRID ALTERADA
-            GridViewRow row = (GridViewRow) ddl.Parent.Parent;
+            GridViewRow row = (GridViewRow)ddl.Parent.Parent;
 
             //PEGA O INDEX ALTERADO
             int index = row.RowIndex;
 
-            TextBox tbx = (TextBox) gdvLayout.Rows[index].FindControl("tbxCaracter");
+            TextBox tbx = (TextBox)gdvLayout.Rows[index].FindControl("tbxCaracter");
             DropDownList ddlDireacao = (DropDownList)gdvLayout.Rows[index].FindControl("ddlDirecao");
 
             if (ddl.SelectedValue.Equals("1"))
@@ -110,7 +91,7 @@ namespace WebAffinities
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void tbxTamanho_TextChanged(object sender, EventArgs e)
-        {           
+        {
             ////PEGA O VALOR INSERIDO NO TAMANHO
             TextBox tbx = (TextBox)sender;
 
@@ -138,14 +119,13 @@ namespace WebAffinities
             bool soma = false;
             foreach (GridViewRow row in gdvLayout.Rows)
             {
-
                 //VERIFICA SE A HIEARQUIA JÁ FOI SETADA COMO UM, SE SIM, NÃO FAZ NADA, SE NÃO, SETA E COLOCA NA LISTA.
                 TextBox tbxInicio = (TextBox)row.FindControl("tbxInicio");
                 TextBox tbxTamanho = (TextBox)row.FindControl("tbxTamanho");
                 TextBox tbxFim = (TextBox)row.FindControl("tbxFim");
                 DropDownList ddlHierarquia = (DropDownList)row.FindControl("ddlHierarquia");
                 hierarquia = Convert.ToInt32(ddlHierarquia.SelectedValue);
-                
+
                 if (!String.IsNullOrEmpty(tbxTamanho.Text))
                 {
                     int tamanho = Convert.ToInt32(tbxTamanho.Text);
@@ -162,7 +142,7 @@ namespace WebAffinities
                         soma = true;
                         posicao = dicHierarquia[hierarquia];
                     }
-                    
+
                     int fim = 0;
 
                     if (soma) posicao = posicao + 1;
@@ -173,12 +153,12 @@ namespace WebAffinities
                     posicao = fim;
 
                     tbxFim.Text = fim.ToString();
-                    
+
                     dicHierarquia[hierarquia] = Convert.ToInt32(tbxFim.Text);
                 }
             }
-            if(setarFoco)
-            SetarFocusCampoTipo(sender, controle);
+            if (setarFoco)
+                SetarFocusCampoTipo(sender, controle);
         }
 
         public void SetarPosicaoLinhaUm()
@@ -187,7 +167,7 @@ namespace WebAffinities
         }
         public void SetarPosicaoLinhaUm(GridViewRow row)
         {
-            TextBox tbx = (TextBox) row.FindControl("tbxInicio");
+            TextBox tbx = (TextBox)row.FindControl("tbxInicio");
             tbx.Text = "1";
         }
 
@@ -208,18 +188,18 @@ namespace WebAffinities
 
         private void SetarColunasDataTable(DataTable dtt)
         {
-            dtt.Columns.Add(new DataColumn("FIXO"));
-            dtt.Columns.Add(new DataColumn("CAMPO"));
-            dtt.Columns.Add(new DataColumn("TAMANHO"));
-            dtt.Columns.Add(new DataColumn("INICIO"));
-            dtt.Columns.Add(new DataColumn("FIM"));
-            dtt.Columns.Add(new DataColumn("ACEITAVEL"));
-            dtt.Columns.Add(new DataColumn("HIERARQUIA"));
-            dtt.Columns.Add(new DataColumn("TIPO"));
-            dtt.Columns.Add(new DataColumn("OBRIGATORIO"));
-            dtt.Columns.Add(new DataColumn("VALIDACAO"));
-            dtt.Columns.Add(new DataColumn("LISTA"));
-            dtt.Columns.Add(new DataColumn("IDDETALHE"));
+            if (!dtt.Columns.Contains("FIXO")) dtt.Columns.Add(new DataColumn("FIXO"));
+            if (!dtt.Columns.Contains("CAMPO")) dtt.Columns.Add(new DataColumn("CAMPO"));
+            if (!dtt.Columns.Contains("TAMANHO")) dtt.Columns.Add(new DataColumn("TAMANHO"));
+            if (!dtt.Columns.Contains("INICIO")) dtt.Columns.Add(new DataColumn("INICIO"));
+            if (!dtt.Columns.Contains("FIM")) dtt.Columns.Add(new DataColumn("FIM"));
+            if (!dtt.Columns.Contains("ACEITAVEL")) dtt.Columns.Add(new DataColumn("ACEITAVEL"));
+            if (!dtt.Columns.Contains("HIERARQUIA")) dtt.Columns.Add(new DataColumn("HIERARQUIA"));
+            if (!dtt.Columns.Contains("TIPO")) dtt.Columns.Add(new DataColumn("TIPO"));
+            if (!dtt.Columns.Contains("OBRIGATORIO")) dtt.Columns.Add(new DataColumn("OBRIGATORIO"));
+            if (!dtt.Columns.Contains("VALIDACAO")) dtt.Columns.Add(new DataColumn("VALIDACAO"));
+            if (!dtt.Columns.Contains("LISTA")) dtt.Columns.Add(new DataColumn("LISTA"));
+            if (!dtt.Columns.Contains("IDDETALHE")) dtt.Columns.Add(new DataColumn("IDDETALHE"));
         }
 
         public void SetarValoresLinha(DataRow dr)
@@ -244,7 +224,7 @@ namespace WebAffinities
             GridViewRow row = (GridViewRow)imgButton.Parent.Parent;
 
             //PEGA A LISTA ORDENADA
-            
+
             //PEGA O DATATABLE E INSERE A LINHA
             DataTable dtt = RecuperarDataTableViewState();
 
@@ -266,7 +246,7 @@ namespace WebAffinities
 
         private void SetarFocusUltimaLinha()
         {
-            TextBox tbx = (TextBox) gdvLayout.Rows[gdvLayout.Rows.Count - 1].FindControl("tbxLinha");
+            TextBox tbx = (TextBox)gdvLayout.Rows[gdvLayout.Rows.Count - 1].FindControl("tbxLinha");
             tbx.Focus();
         }
 
@@ -310,8 +290,8 @@ namespace WebAffinities
                 dtt.Rows[row.RowIndex]["OBRIGATORIO"] = ddlObrigatorio.SelectedValue;
                 dtt.Rows[row.RowIndex]["VALIDACAO"] = ddlListaValidacao.SelectedValue;
                 dtt.Rows[row.RowIndex]["LISTA"] = ddlListaValores.SelectedValue;
-                if(!String.IsNullOrEmpty(lblLayoutArquivoDetalheId.Text))
-                dtt.Rows[row.RowIndex]["IDDETALHE"] = Convert.ToInt32(lblLayoutArquivoDetalheId.Text);
+                if (!String.IsNullOrEmpty(lblLayoutArquivoDetalheId.Text))
+                    dtt.Rows[row.RowIndex]["IDDETALHE"] = Convert.ToInt32(lblLayoutArquivoDetalheId.Text);
             }
 
             AtualizarDataGrid(dtt);
@@ -350,6 +330,8 @@ namespace WebAffinities
 
             //GRAVA TODA A TABELA NOVAMNETE.
             GravarGridBD();
+
+            //
         }
 
         public void SetarDataTableViewState(DataTable dtt)
@@ -368,10 +350,10 @@ namespace WebAffinities
 
         private void SetarFocusCampoTipo(object sender, string campo)
         {
-            Control obj = (Control) sender;
+            Control obj = (Control)sender;
 
             //LINHA DO GRID
-            GridViewRow row = (GridViewRow) obj.Parent.Parent;
+            GridViewRow row = (GridViewRow)obj.Parent.Parent;
 
             //SETAR O FOCUS.
             if (row.FindControl(campo) != null)
@@ -442,6 +424,13 @@ namespace WebAffinities
             }
 
             BOAffinities.LayoutArquivoDetalhe.GravarLayoutArquivoDetalhe(layout);
+
+            AtualizarGridBD(RecuperarDataTableViewState());
+        }
+
+        protected void btnValidar_Click(object sender, EventArgs e)
+        {
+             BOAffinities.ValidacaoArquivo.ValidarArquivo(1, string.Empty);
         }
     }
 }
