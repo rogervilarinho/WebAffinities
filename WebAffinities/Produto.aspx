@@ -181,6 +181,9 @@
                         </Columns>
                     </asp:GridView>
                 </div>
+                <br />
+                 <div style="clear: both" class="error" id="divError" runat="server">
+                 </div>
             </fieldset>
         </div>
         <div>

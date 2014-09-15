@@ -430,7 +430,7 @@ namespace WebAffinities
 
         protected void btnValidar_Click(object sender, EventArgs e)
         {
-             BOAffinities.ValidacaoArquivo.ValidarArquivo(1, string.Empty);
+            divError.InnerHtml = BOAffinities.ValidacaoArquivo.ValidarArquivo(1, string.Empty).ToString();
         }
     }
 }
