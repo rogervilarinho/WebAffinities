@@ -23,5 +23,13 @@ namespace DAOAffinities
                 throw;
             }
         }
+
+        public static string PegarNomeLista(int listaId)
+        {
+            using (AffinitiesEntities db = new AffinitiesEntities())
+            {
+                return db.TB_LISTA.Where(x => x.ID_LISTA.Equals(listaId)).Select(x => x.NOM_LISTA).First().ToString();
+            }
+        }
     }
 }

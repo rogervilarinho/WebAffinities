@@ -71,12 +71,27 @@ namespace BOAffinities
 
         public static void InserirMensagem(StringBuilder sb, string mensagem, int auxLinha)
         {
-            sb.Append(String.Concat("[Linha ", auxLinha, "]: ", mensagem, "! <br />").ToUpper());
+            InserirMensagem(sb, mensagem, auxLinha, System.Drawing.Color.Red);
+        }
+
+        public static void InserirMensagem(StringBuilder sb, string mensagem, int auxLinha, System.Drawing.Color cor)
+        {
+            sb.Append(FormatarMensagem(cor, String.Concat("[Linha ", auxLinha, "]: ", mensagem, "! <br />").ToUpper()));
         }
 
         public static void InserirMensagem(StringBuilder sb, string mensagem, TB_LAYOUT_ARQUIVO_DETALHE campo, int auxLinha, string sub)
         {
-            sb.Append(String.Concat("[Linha ", auxLinha, " - Posição ", campo.NUM_INICIO, " - ", campo.NUM_FIM, " (", campo.DES_CAMPO, ")]: ", mensagem, "! <br />").ToUpper());
+            InserirMensagem(sb, mensagem, campo, auxLinha, sub, System.Drawing.Color.Red);
+        }
+
+        public static void InserirMensagem(StringBuilder sb, string mensagem, TB_LAYOUT_ARQUIVO_DETALHE campo, int auxLinha, string sub, System.Drawing.Color cor)
+        {
+            sb.Append(FormatarMensagem(cor, String.Concat("[Linha ", auxLinha, " - Posição ", campo.NUM_INICIO, " - ", campo.NUM_FIM, " (", campo.DES_CAMPO, ")]: ", mensagem, "! <br />").ToUpper()));
+        }
+
+        public static string FormatarMensagem(System.Drawing.Color cor, string mensagem)
+        {
+            return String.Concat("<font color=", cor.Name, ">", mensagem, "</font>");
         }
 
         private static StringBuilder IniciarValidacao(string linha, IEnumerable<TB_LAYOUT_ARQUIVO_DETALHE> enumerable, StringBuilder sb, int auxLinha)
@@ -94,64 +109,85 @@ namespace BOAffinities
                         //VERIFICA SEPARA A SUBSTRING QUE SERÁ VALIDADA
                         string sub = linha.Substring(campo.NUM_INICIO - 1, campo.NUM_TAMANHO);
 
-                        if (campo.ID_OBRIGATORIO.Equals(1))
+                        //VERIFICA SE O CAMPO TEM ALGUM DADO OBRIGATÓRIO
+                        if (!String.IsNullOrEmpty(campo.DES_DADO_ACEITAVEL))
                         {
-                            //VERIFICA SE O CAMPO TEM ALGUM DADO OBRIGATÓRIO
-                            if (!String.IsNullOrEmpty(campo.DES_DADO_ACEITAVEL))
-                            {
-                                //QUEBRA A LINHA COM PONTO E VIRGULA
-                                List<string> lstAceitavel = new List<string>();
-                                lstAceitavel.AddRange(campo.DES_DADO_ACEITAVEL.Split(';'));
+                            //QUEBRA A LINHA COM PONTO E VIRGULA
+                            List<string> lstAceitavel = new List<string>();
+                            lstAceitavel.AddRange(campo.DES_DADO_ACEITAVEL.Split(';'));
 
-                                if (!lstAceitavel.Contains(sub.Trim()))
+                            //SE FOR OBRIGATÓRIO E NÃO ESTIVER NA LISTA.
+                            if (!lstAceitavel.Contains(sub.Trim()))
+                            {
+                                if (campo.ID_OBRIGATORIO.Equals(1))
                                 {
                                     //sb.Append(String.Concat("Linha ", auxLinha, " : A linha possui um valor não aceito ", sub, " na lista informada como para o campo em questão (", campo.DES_DADO_ACEITAVEL, ")! <br />"));
                                     InserirMensagem(sb, String.Concat("A linha possui um valor não aceito (", sub, ") na lista informada para o campo em questão (", campo.DES_DADO_ACEITAVEL, ")"), campo, auxLinha, sub);
                                 }
-                            }
-
-
-                            //SE O NÚMERO É INTEIRO VERIFICA SE DA PARA CONVERTER PARA INT SÓ VERIFICA SE O CAMPO FOR OBRIGATÓRIO
-                            if (campo.ID_TIPO.Equals(2))
-                            {
-                                try
+                                else
                                 {
-                                    Int64.Parse(sub);
-                                }
-                                catch (FormatException)
-                                {
-                                    //ERRO DE FORMATO (PODE SER STRING)
-                                }
-                                catch (ArgumentNullException)
-                                {
-                                    //VALOR EM BRANCO
-                                }
-                            }
-                            else if (campo.ID_TIPO.Equals(3))
-                            {
-                                try
-                                {
-                                    //VERIFICA SE TEM DUAS CASAS APÓS A VIRGULA
-                                    if (sub.Split(',').Count() == 2 && sub.Split(',')[1].Length == 2)
-                                    {
-                                        Double.Parse(sub);
-                                    }
-                                    else
-                                    {
-                                        //ERRO NO FORMATO.
-                                    }
-
-                                }
-                                catch (FormatException)
-                                {
-                                    //ERRO DE FORMATO (PODE SER STRING)
-                                }
-                                catch (ArgumentNullException)
-                                {
-                                    //VALOR EM BRANCO
+                                    InserirMensagem(sb, String.Concat("A linha possui um valor não aceito (", sub, ") na lista informada para o campo em questão (", campo.DES_DADO_ACEITAVEL, ")"), campo, auxLinha, sub, System.Drawing.Color.Green);
                                 }
                             }
                         }
+                        if (campo.ID_LISTA != null)
+                        {
+                            var listaDetalhe = DAOAffinities.ListaDetalhe.ListarListaDetalhe(campo.ID_LISTA.Value).Select(x => x.DES_VALOR.ToUpper());
+                            //VERIFICA SE O CAMPO ESTA NA LISTA
+                            if (!listaDetalhe.Contains(sub.ToUpper().Trim()))
+                            {
+                                if (campo.ID_OBRIGATORIO.Equals(1))
+                                {
+                                    InserirMensagem(sb, String.Concat("A linha possui um valor não aceito (", sub, ") na lista (", DAOAffinities.Lista.PegarNomeLista(campo.ID_LISTA.Value), ")"), campo, auxLinha, sub);
+                                }
+                                else
+                                {
+                                    InserirMensagem(sb, String.Concat("A linha possui um valor não aceito (", sub, ") na lista (", DAOAffinities.Lista.PegarNomeLista(campo.ID_LISTA.Value), ")"), campo, auxLinha, sub, System.Drawing.Color.Green);
+                                }
+                            }
+
+                        }
+                        //SE O NÚMERO É INTEIRO VERIFICA SE DA PARA CONVERTER PARA INT SÓ VERIFICA SE O CAMPO FOR OBRIGATÓRIO
+                        if (campo.ID_TIPO.Equals(2))
+                        {
+                            try
+                            {
+                                Int64.Parse(sub);
+                            }
+                            catch (FormatException)
+                            {
+                                //ERRO DE FORMATO (PODE SER STRING)
+                            }
+                            catch (ArgumentNullException)
+                            {
+                                //VALOR EM BRANCO
+                            }
+                        }
+                        else if (campo.ID_TIPO.Equals(3))
+                        {
+                            try
+                            {
+                                //VERIFICA SE TEM DUAS CASAS APÓS A VIRGULA
+                                if (sub.Split(',').Count() == 2 && sub.Split(',')[1].Length == 2)
+                                {
+                                    Double.Parse(sub);
+                                }
+                                else
+                                {
+                                    //ERRO NO FORMATO.
+                                }
+
+                            }
+                            catch (FormatException)
+                            {
+                                //ERRO DE FORMATO (PODE SER STRING)
+                            }
+                            catch (ArgumentNullException)
+                            {
+                                //VALOR EM BRANCO
+                            }
+                        }
+
                     }
                 }
                 else

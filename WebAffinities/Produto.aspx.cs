@@ -366,6 +366,7 @@ namespace WebAffinities
         protected void btnGravarLayout_Click(object sender, EventArgs e)
         {
             GravarGridBD();
+            divError.InnerText = "Layout gravado com sucesso!";
         }
 
         private void GravarGridBD()
