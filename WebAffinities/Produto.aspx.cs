@@ -12,6 +12,7 @@ namespace WebAffinities
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
             if (!IsPostBack)
             {
                 DataTable dtt = new DataTable();
@@ -432,6 +433,18 @@ namespace WebAffinities
         protected void btnValidar_Click(object sender, EventArgs e)
         {
             divError.InnerHtml = BOAffinities.ValidacaoArquivo.ValidarArquivo(1, string.Empty).ToString();
+        }
+
+        protected void imgDetalheLinha_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                popupCampoDetalhe.Show();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

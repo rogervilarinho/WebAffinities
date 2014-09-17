@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebAffinities.SiteMaster" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -7,6 +6,7 @@
     <title><%: Page.Title %> - Affinities ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="Content/bootstrap.css" rel="Stylesheet" />
     <asp:PlaceHolder runat="server">
         <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
     </asp:PlaceHolder>
@@ -15,12 +15,12 @@
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <ajaxToolkit:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
             <Scripts>
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="jquery.ui.combined" />
             </Scripts>
-        </asp:ScriptManager>
+        </ajaxToolkit:ToolkitScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <header>

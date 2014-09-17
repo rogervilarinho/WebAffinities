@@ -1,6 +1,4 @@
 ﻿<%@ Page Title="Produtos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Produto.aspx.cs" Inherits="WebAffinities.Produto" MaintainScrollPositionOnPostback="true" %>
-
-<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
@@ -9,14 +7,15 @@
     <div id="stylizedEndosso" class="myform">
         <h1>Produto:</h1>
         <p>
-            Preencha os dados para validação de um arquivo para o produto em questão.</p>
+            Preencha os dados para validação de um arquivo para o produto em questão.
+        </p>
         <div style="width: 100%">
             <fieldset>
                 <legend>Produto</legend>
                 <div style="width: 100%">
                     <div class="editor-label">
                         <label>
-                        Nome do Produto: 
+                            Nome do Produto: 
                         </label>
                     </div>
                     <div class="editor-field">
@@ -24,7 +23,7 @@
                     </div>
                     <div class="editor-label">
                         <label>
-                        Código do Produto:</label>
+                            Código do Produto:</label>
                     </div>
                     <div class="editor-field">
                         <asp:TextBox ID="tbxCodigoProduto" runat="server" Width="50px" Text="525"></asp:TextBox>
@@ -38,8 +37,8 @@
                 </div>
                 <br />
                 <div class="editor-field">
-                        <asp:Button ID="btnValidar" runat="server" Text="Validar Layout" OnClick="btnValidar_Click" />
-                    </div>
+                    <asp:Button ID="btnValidar" runat="server" Text="Validar Layout" OnClick="btnValidar_Click" />
+                </div>
                 <br />
                 <div style="clear: both; width: 100%;">
                     <asp:GridView ID="gdvLayout" runat="server" AutoGenerateColumns="False">
@@ -77,7 +76,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="TIPO" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%" SelectedValue='<%# Bind("TIPO") %>' DataSourceID="clsTipo" DataTextField="NOM_TIPO" DataValueField="ID_TIPO"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%" SelectedValue='<%# Bind("TIPO") %>' DataSourceID="clsTipo" DataTextField="NOM_TIPO" DataValueField="ID_TIPO">
+                                    </asp:DropDownList>
                                     <asp:ObjectDataSource ID="clsTipo" runat="server" SelectMethod="ListarHierarquia" TypeName="BOAffinities.Tipo"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="90px" />
@@ -85,7 +85,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="OBRIGATÓRIO?">
                                 <ItemTemplate>
-                                    <asp:DropDownList ID="ddlObrigatorio" runat="server" Width="80px" SelectedValue='<%# Bind("OBRIGATORIO") %>' DataSourceID="clsObrigatorio" DataTextField="NOM_OBRIGATORIO" DataValueField="ID_OBRIGATORIO"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlObrigatorio" runat="server" Width="80px" SelectedValue='<%# Bind("OBRIGATORIO") %>' DataSourceID="clsObrigatorio" DataTextField="NOM_OBRIGATORIO" DataValueField="ID_OBRIGATORIO">
+                                    </asp:DropDownList>
                                     <asp:ObjectDataSource ID="clsObrigatorio" runat="server" SelectMethod="ListarObrigatorio" TypeName="DAOAffinities.Obrigatorio"></asp:ObjectDataSource>
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="80px" />
@@ -166,14 +167,21 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgAdicionarLinha" CausesValidation="true" ImageUrl="~/Images/1410369120_Add.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgAdicionarLinha_Click" />
+                                    <asp:ImageButton ID="imgAdicionarLinha" CausesValidation="true" ImageUrl="~/Images/1410369120_Add.png" runat="server" AlternateText="Adicionar Linha" OnClick="imgAdicionarLinha_Click" style="height:auto; width:auto" />
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="15px" />
                                 <ItemStyle Width="15px" HorizontalAlign="Center" VerticalAlign="Middle" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgRemoverLinha" ImageUrl="~/Images/1410369134_Delete.png" runat="server" Width="15px" Height="15px" AlternateText="Adicionar Linha" OnClick="imgRemoverLinha_Click" />
+                                    <asp:ImageButton ID="imgDetalheLinha" ImageUrl="~/Images/1410906450_Search.png" runat="server" AlternateText="Mais detalhes" OnClick="imgDetalheLinha_Click" style="height:auto; width:auto" />
+                                </ItemTemplate>
+                                <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="15px" />
+                                <ItemStyle Width="15px" HorizontalAlign="Center" VerticalAlign="Middle" />
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="imgRemoverLinha" ImageUrl="~/Images/1410369134_Delete.png" runat="server" AlternateText="Adicionar Linha" OnClick="imgRemoverLinha_Click" style="height:auto; width:auto" />
                                 </ItemTemplate>
                                 <HeaderStyle Font-Size="10px" Font-Strikeout="False" HorizontalAlign="Center" Width="15px" />
                                 <ItemStyle Width="15px" HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -182,12 +190,20 @@
                     </asp:GridView>
                 </div>
                 <br />
-                 <div style="clear: both" class="error" id="divError" runat="server">
-                 </div>
+                <div style="clear: both" class="error" id="divError" runat="server">
+                </div>
             </fieldset>
         </div>
-        <div>
-            <%--            @Html.ActionLink("Voltar", "Index", "Home")--%>
+        <asp:Button runat="server" ID="btnShowModalPopup" style="display:none"/>
+        <ajaxToolkit:ModalPopupExtender ID="popupCampoDetalhe" runat="server" CancelControlID="btnSair" PopupControlID="popUpPanelCampoDetalhe" PopupDragHandleControlID="popUpPanelCampoDetalhe" TargetControlID="btnShowModalPopup" BackgroundCssClass="ModalPopupBG"></ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="popUpPanelCampoDetalhe" runat="server" style="display:none" Width="100%" HorizontalAlign="Center">
+                <div class="TituloModal center-block">
+                    DETALHES DO CAMPO TIPO DE REGISTRO
+                </div>
+                <div id="divpopUpCampoDetalhe" class="CorpoModal center-block">
+                    <asp:Button ID="btnSair" runat="server" Text="Fechar"/>
+                </div>
+            </asp:Panel>
         </div>
     </div>
 </asp:Content>

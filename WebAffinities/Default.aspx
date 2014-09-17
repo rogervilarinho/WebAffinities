@@ -9,7 +9,7 @@
             </hgroup>
             <p>
                 Esta aplicação permite que os layouts de produtos que possuem arquivos de textos sejam construídos ou importados.
-                A partir da construção de um layout de produto<mark>você pode criar layouts de arquivos de origem</mark>para geração de arquivos no layout desejado.
+                A partir da construção de um layout de produto <mark>você pode criar layouts de arquivos de origem</mark> para geração de arquivos no layout desejado.
                 A aplicação trabalha com os formatos<mark>.txt, .xml e .dat.</mark>
             </p>
         </div>
